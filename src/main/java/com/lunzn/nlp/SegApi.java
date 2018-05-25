@@ -32,7 +32,10 @@ public class SegApi {
      * 取词识别
      */
     private final static String ALLOW_REGEX = "^(?:ns|nr|channel|channelgroup|control|mvname|topname|typename)?";
-
+    /**
+     * 取词识别
+     */
+    private final static String DEF_PATH = "./j_home/resource/dic/all";
     /**
      * 时间处理器
      */
@@ -48,7 +51,7 @@ public class SegApi {
      * 
      * @param content
      *            待分词语句
-     * @return
+     * @return Object
      * @see [类、类#方法、类#成员]
      */
     @Execute
@@ -61,7 +64,7 @@ public class SegApi {
      * 
      * @param content
      *            待分词语句
-     * @return
+     * @return Object
      * @see [类、类#方法、类#成员]
      */
     @Execute
@@ -74,7 +77,7 @@ public class SegApi {
      * 
      * @param content
      *            待分词语句
-     * @return
+     * @return Object
      * @see [类、类#方法、类#成员]
      */
     @Execute
@@ -87,7 +90,7 @@ public class SegApi {
      * 
      * @param content
      *            待分词语句
-     * @return
+     * @return Object
      * @see [类、类#方法、类#成员]
      */
     @Execute
@@ -100,7 +103,7 @@ public class SegApi {
      * 
      * @param content
      *            待分词语句
-     * @return
+     * @return Object
      * @see [类、类#方法、类#成员]
      */
     @Execute
@@ -119,7 +122,7 @@ public class SegApi {
      *            词性
      * @param freq
      *            词频
-     * @return
+     * @return Object
      * @see [类、类#方法、类#成员]
      */
     @Execute
@@ -144,7 +147,7 @@ public class SegApi {
      * 
      * @param json
      *            词典json列表
-     * @return
+     * @return Object
      * @see addDic
      */
     @Execute
@@ -174,7 +177,7 @@ public class SegApi {
      * 
      * @param dic
      *            DicLibrary : 用户自定义词典,格式:词语\t词性\t词频
-     * @return
+     * @return Object
      * @see https://github.com/NLPchina/ansj_seg/wiki/%E7%94%A8%E6%88%B7%E8%87%
      *      AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8
      */
@@ -197,7 +200,7 @@ public class SegApi {
      * 
      * @param json
      *            词典json列表
-     * @return
+     * @return Object
      * @see addDic
      */
     @Execute
@@ -228,7 +231,7 @@ public class SegApi {
      * 
      * @param dic
      *            DicLibrary : 用户自定义词典,格式:词语\t词性\t词频
-     * @return
+     * @return Object
      * @see https://github.com/NLPchina/ansj_seg/wiki/%E7%94%A8%E6%88%B7%E8%87%
      *      AA%E5%AE%9A%E4%B9%89%E8%AF%8D%E5%85%B8
      */
@@ -252,14 +255,14 @@ public class SegApi {
      * 
      * @param path
      *            resources路径（default：./jcoder_home/resource/dic/all）
-     * @return
+     * @return Object
      * @throws FileNotFoundException
      * @throws UnsupportedEncodingException
      * @see [类、类#方法、类#成员]
      */
     @Execute
     public Object loadDic4UploadFile(String path) throws UnsupportedEncodingException, FileNotFoundException {
-        path = null == path ? "./jcoder_home/resource/dic/all" : path;
+        path = null == path ? DEF_PATH : path;
         DicLibrary.put(DicLibrary.DEFAULT, path);
         return IOUtil.readFile2List(path, IOUtil.UTF8);
     }
@@ -269,7 +272,7 @@ public class SegApi {
      * 
      * @param content
      *            待解析语音
-     * @return
+     * @return Object
      * @see [类、类#方法、类#成员]
      */
     @Execute
@@ -415,4 +418,9 @@ public class SegApi {
         return normalizer.getTimeUnit();
     }
 
+    public static void main(String[] args) {
+        SegApi api = new SegApi();
+        System.out.println(api.parse("刘德华和梁朝伟的电影"));
+
+    }
 }
